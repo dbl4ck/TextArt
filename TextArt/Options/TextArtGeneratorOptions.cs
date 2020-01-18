@@ -12,7 +12,8 @@ namespace TextArt.Options
         public string FontName { get; set; }
         public int MaximumFontSize { get; set; }
         public int MinimumFontSize { get; set; }
-        public int x_step { get; set; }
-        public int y_step { get; set; }
+        public int XStep { get; set; }
+        public int YStep { get; set; }
+        public int Scatter { get; set; }
     }
 }

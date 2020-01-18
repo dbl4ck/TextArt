@@ -24,12 +24,12 @@ namespace TextArt.Generators
             var random = new Random(m_options.Seed);
             var original_width = m_source.Width;
             var original_height = m_source.Height;
-            var x_step = m_options.x_step;
-            var y_step = m_options.y_step;
+            var x_step = m_options.XStep;
+            var y_step = m_options.YStep;
 
             var generated = new Bitmap(original_width, original_height);
 
-            Graphics gfx_generated = Graphics.FromImage(generated);
+            Graphics graphics = Graphics.FromImage(generated);
 
             for (int x = 0; x < original_width; x += x_step)
             {
@@ -41,18 +41,30 @@ namespace TextArt.Generators
                     var brush = new SolidBrush(pixel);
                     var character = m_options.Alphabet[random.Next(0, m_options.Alphabet.Length)].ToString();
 
-                    var character_dimension = gfx_generated.MeasureString(character, font);
+                    var character_dimension = graphics.MeasureString(character, font);
 
                     var width = character_dimension.Width;
                     var height = character_dimension.Height;
 
                     PointF point = GetOffsetCoordinates(x, y, width, height);
+                    
+                    point = ApplyScatter(random, point);
 
-                    gfx_generated.DrawString(character, font, brush, point);
+                    graphics.DrawString(character, font, brush, point);
                 }
             }
 
            return generated;
+        }
+
+        private PointF ApplyScatter(Random random, PointF point)
+        {
+            var scatter = m_options.Scatter;
+
+            point.X += (random.Next(0, scatter * 2) - scatter);
+            point.Y += (random.Next(0, scatter * 2) - scatter);
+
+            return point;
         }
 
         private PointF GetOffsetCoordinates(float x, float y, float width, float height )

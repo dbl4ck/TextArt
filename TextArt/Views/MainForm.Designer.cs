@@ -58,6 +58,8 @@
             this.txtAlphabet = new System.Windows.Forms.TextBox();
             this.lblRandomSeed = new System.Windows.Forms.Label();
             this.txtRandomSeed = new System.Windows.Forms.TextBox();
+            this.lblScatter = new System.Windows.Forms.Label();
+            this.txtScatter = new System.Windows.Forms.TextBox();
             this.ViewModelBinding = new System.Windows.Forms.BindingSource(this.components);
             this.tcImages.SuspendLayout();
             this.tabOriginalImage.SuspendLayout();
@@ -130,7 +132,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(42, 892);
+            this.btnGenerate.Location = new System.Drawing.Point(42, 944);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(261, 77);
             this.btnGenerate.TabIndex = 7;
@@ -324,7 +326,7 @@
             // lblRandomSeed
             // 
             this.lblRandomSeed.AutoSize = true;
-            this.lblRandomSeed.Location = new System.Drawing.Point(35, 842);
+            this.lblRandomSeed.Location = new System.Drawing.Point(35, 872);
             this.lblRandomSeed.Name = "lblRandomSeed";
             this.lblRandomSeed.Size = new System.Drawing.Size(68, 25);
             this.lblRandomSeed.TabIndex = 25;
@@ -333,10 +335,27 @@
             // txtRandomSeed
             // 
             this.txtRandomSeed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ViewModelBinding, "RandomSeed", true));
-            this.txtRandomSeed.Location = new System.Drawing.Point(201, 839);
+            this.txtRandomSeed.Location = new System.Drawing.Point(201, 869);
             this.txtRandomSeed.Name = "txtRandomSeed";
             this.txtRandomSeed.Size = new System.Drawing.Size(100, 31);
             this.txtRandomSeed.TabIndex = 24;
+            // 
+            // lblScatter
+            // 
+            this.lblScatter.AutoSize = true;
+            this.lblScatter.Location = new System.Drawing.Point(33, 821);
+            this.lblScatter.Name = "lblScatter";
+            this.lblScatter.Size = new System.Drawing.Size(86, 25);
+            this.lblScatter.TabIndex = 27;
+            this.lblScatter.Text = "Scatter:";
+            // 
+            // txtScatter
+            // 
+            this.txtScatter.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.ViewModelBinding, "Scatter", true));
+            this.txtScatter.Location = new System.Drawing.Point(199, 818);
+            this.txtScatter.Name = "txtScatter";
+            this.txtScatter.Size = new System.Drawing.Size(100, 31);
+            this.txtScatter.TabIndex = 26;
             // 
             // ViewModelBinding
             // 
@@ -348,6 +367,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1698, 1143);
+            this.Controls.Add(this.lblScatter);
+            this.Controls.Add(this.txtScatter);
             this.Controls.Add(this.lblRandomSeed);
             this.Controls.Add(this.txtRandomSeed);
             this.Controls.Add(this.lblAlphabet);
@@ -418,6 +439,8 @@
         private System.Windows.Forms.TextBox txtAlphabet;
         private System.Windows.Forms.Label lblRandomSeed;
         private System.Windows.Forms.TextBox txtRandomSeed;
+        private System.Windows.Forms.Label lblScatter;
+        private System.Windows.Forms.TextBox txtScatter;
     }
 }
 

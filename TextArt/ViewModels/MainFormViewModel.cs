@@ -25,7 +25,7 @@ namespace TextArt.ViewModels
         public int MaximumFontSize { get; set; }
         public int RandomSeed { get; set; }
         public Color BackgroundColor { get; set; }
-
+        public int Scatter { get; set; }
         public int XStep { get; set; }
         public int YStep { get; set; }
 
@@ -37,22 +37,28 @@ namespace TextArt.ViewModels
 
             var generator = new TextArtGenerator(
                 InputImage,
-                new TextArtGeneratorOptions()
-                {
-                    Alphabet = Alphabet,
-                    DesiredHeight = DesiredHeight,
-                    DesiredWidth = DesiredWidth,
-                    InputImage = InputImage,
-                    MaximumFontSize = MaximumFontSize,
-                    MinimumFontSize = MinimumFontSize,
-                    FontName = FontName,
-                    x_step = XStep,
-                    y_step = YStep,
-                    Seed = RandomSeed
-                }
+                MapOptions()
             );
 
             OutputImage = generator.Generate();
+        }
+
+        private TextArtGeneratorOptions MapOptions()
+        {
+            return new TextArtGeneratorOptions()
+            {
+                Alphabet = Alphabet,
+                DesiredHeight = DesiredHeight,
+                DesiredWidth = DesiredWidth,
+                InputImage = InputImage,
+                MaximumFontSize = MaximumFontSize,
+                MinimumFontSize = MinimumFontSize,
+                FontName = FontName,
+                XStep = XStep,
+                YStep = YStep,
+                Seed = RandomSeed,
+                Scatter = Scatter
+            };
         }
 
         private void ValidateArguments()
@@ -77,6 +83,8 @@ namespace TextArt.ViewModels
                 throw new InvalidOperationException("Y Step must be greater than zero.");
             if (Alphabet.Trim().Length == 0)
                 throw new InvalidOperationException("Alphabet must contain at least one non-whitespace character.");
+            if (Scatter < 0)
+                throw new InvalidOperationException("Scatter should be greater than or equal to zero.");
         }
     }
 }
