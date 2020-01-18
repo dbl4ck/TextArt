@@ -1,0 +1,18 @@
+﻿using System.Drawing;
+
+namespace TextArt.Options
+{
+    public class TextArtGeneratorOptions
+    {
+        public int Seed { get; set; }
+        public string Alphabet{ get; set; }
+        public Image InputImage { get; set; }
+        public int DesiredWidth { get; set; }
+        public int DesiredHeight { get; set; }
+        public string FontName { get; set; }
+        public int MaximumFontSize { get; set; }
+        public int MinimumFontSize { get; set; }
+        public int x_step { get; set; }
+        public int y_step { get; set; }
+    }
+}
