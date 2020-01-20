@@ -39,7 +39,7 @@ namespace TextArt.Generators
                     var font = new Font(m_options.FontName, fontSize);
                     var pixel = ((Bitmap)m_source).GetPixel(x, y);
                     var brush = new SolidBrush(pixel);
-                    var character = m_options.Alphabet[random.Next(0, m_options.Alphabet.Length)].ToString();
+                    string character = GetRandomAlphabetCharacter(random);
 
                     var character_dimension = graphics.MeasureString(character, font);
 
@@ -58,6 +58,11 @@ namespace TextArt.Generators
             Bitmap resized = Resize(generated, size);
 
             return resized;
+        }
+
+        private string GetRandomAlphabetCharacter(Random random)
+        {
+            return m_options.Alphabet[random.Next(0, m_options.Alphabet.Length)].ToString();
         }
 
         private Size GetNewSize()
