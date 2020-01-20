@@ -108,10 +108,12 @@ namespace TextArt.ViewModels
         {
             ValidateArguments();
 
-            var generator = new TextArtGenerator(
-                InputImage,
-                MapOptions()
-            );
+            var generator = 
+                new TextArtGenerator
+                (
+                    InputImage,
+                    MapOptions()
+                );
 
             OutputImage = generator.Generate();
         }
