@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using TextArt.Generators;
 using TextArt.Options;
+using TextArt.Constants;
 
 namespace TextArt.ViewModels
 {
@@ -138,28 +140,39 @@ namespace TextArt.ViewModels
 
         private void ValidateArguments()
         {
+            var messages = new ResourceManager(typeof(Messages));
+            string messageRef = null;
+
             if (InputImage is null)
-                throw new InvalidOperationException("Load an image first.");
+                messageRef = MessageRef.ELoadImageFirst;
             if (DesiredHeight < 0)
-                throw new InvalidOperationException("Desired Height must be greater than zero.");
+                messageRef = MessageRef.EDesiredHeightGreaterThanZero;
             if (DesiredWidth < 0)
-                throw new InvalidOperationException("Desired Width must be greater than zero.");
+                messageRef = MessageRef.EDesiredWidthGreaterThanZero;
             if (FontName is null | FontName == String.Empty)
-                throw new InvalidOperationException("Font Name not specified.");
+                messageRef = MessageRef.EFontNotSpecified;
             if (MinimumFontSize <= 0)
-                throw new InvalidOperationException("Minimum Font Size must be greater than zero.");
+                messageRef = MessageRef.EMinFontSizeGreaterThanZero;
             if (MaximumFontSize <= 0)
-                throw new InvalidOperationException("Maximum Font Size must be greater than zero.");
+                messageRef = MessageRef.EMaxFontSizeGreaterThanZero;
             if (MaximumFontSize < MinimumFontSize)
-                throw new InvalidOperationException("Maximum Font Size must be greater than or equal to Minimum Font Size.");
+                messageRef = MessageRef.EMaxFontSizeGreaterThanMinFontSize;
             if (XStep <= 0)
-                throw new InvalidOperationException("X Step must be greater than zero.");
+                messageRef = MessageRef.EXStepGreaterThanZero;
             if (YStep <= 0)
-                throw new InvalidOperationException("Y Step must be greater than zero.");
+                messageRef = MessageRef.EYStepGreaterThanZero;
             if (Alphabet.Trim().Length == 0)
-                throw new InvalidOperationException("Alphabet must contain at least one non-whitespace character.");
+                messageRef = MessageRef.EAlphabetIsNullOrEmpty;
             if (Scatter < 0)
-                throw new InvalidOperationException("Scatter should be greater than or equal to zero.");
+                messageRef = MessageRef.EScatterGreaterThanZero;
+
+            if (messageRef != null)
+            {
+                throw new InvalidOperationException
+                (
+                    messages.GetString(messageRef)
+                );
+            }
         }
     }
 }

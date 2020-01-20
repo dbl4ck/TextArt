@@ -46,7 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\MessageRef.cs" />
     <Compile Include="Factories\Form1ViewModelFactory.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LoadImageFromURLDialogViewModel.cs" />
     <Compile Include="Views\LoadImageFromURLDialog.cs">
       <SubType>Form</SubType>
@@ -65,6 +71,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainFormViewModel.cs" />
+    <EmbeddedResource Include="Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\LoadImageFromURLDialog.resx">
       <DependentUpon>LoadImageFromURLDialog.cs</DependentUpon>
     </EmbeddedResource>
