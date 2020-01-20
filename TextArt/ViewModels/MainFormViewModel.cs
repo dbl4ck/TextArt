@@ -46,11 +46,15 @@ namespace TextArt.ViewModels
 
                 if (InputImageIsLoaded() && LockAspectRatio)
                 {
-                    var ratio = ((double)m_desiredWidth / (double)InputImage.Width);
-
-                    m_desiredHeight = (int)(InputImage.Height * ratio);
+                    m_desiredHeight = 
+                        GetProportionalOtherDimension
+                        ( 
+                            m_desiredWidth, 
+                            InputImage.Width, 
+                            InputImage.Height
+                        );
                 }
-                
+
             }
         }
 
@@ -66,19 +70,28 @@ namespace TextArt.ViewModels
 
                 if (InputImageIsLoaded() && LockAspectRatio)
                 {
-                    var ratio = ((double)m_desiredHeight / (double)InputImage.Height);
-                    
-                    m_desiredWidth = (int)(InputImage.Width * ratio);
+                    m_desiredWidth = 
+                        GetProportionalOtherDimension
+                        (
+                            m_desiredHeight,
+                            InputImage.Height,
+                            InputImage.Width
+                        );
                 }
             }
         }
+
+        #endregion
 
         private bool InputImageIsLoaded()
         {
             return InputImage != null;
         }
 
-        #endregion
+        private int GetProportionalOtherDimension(int newThis, int originalThis, int originalOther)
+        {
+            return (int)(originalOther * ((double)newThis / (double)originalThis));
+        }
 
         internal void Generate()
         {
