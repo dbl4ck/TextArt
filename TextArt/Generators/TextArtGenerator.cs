@@ -35,7 +35,7 @@ namespace TextArt.Generators
             {
                 for (int y = 0; y < original_height; y += y_step)
                 {
-                    var fontSize = random.Next(m_options.MinimumFontSize, m_options.MaximumFontSize);
+                    int fontSize = NewMethod(random);
                     var font = new Font(m_options.FontName, fontSize);
                     var pixel = ((Bitmap)m_source).GetPixel(x, y);
                     var brush = new SolidBrush(pixel);
@@ -58,6 +58,11 @@ namespace TextArt.Generators
             Bitmap resized = Resize(generated, size);
 
             return resized;
+        }
+
+        private int NewMethod(Random random)
+        {
+            return random.Next(m_options.MinimumFontSize, m_options.MaximumFontSize);
         }
 
         private string GetRandomAlphabetCharacter(Random random)
