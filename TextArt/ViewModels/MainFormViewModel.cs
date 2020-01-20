@@ -12,13 +12,11 @@ namespace TextArt.ViewModels
     public class MainFormViewModel
     {
 
-        #region "properties"
+        #region "simple properties"
 
         public string Alphabet { get; set; }
         public Image InputImage { get; set; }
         public Image OutputImage { get; set; }
-        public int DesiredWidth { get; set; }
-        public int DesiredHeight { get; set; }
         public bool LockAspectRatio { get; set; }
         public string FontName { get; set; }
         public int MinimumFontSize { get; set; }
@@ -28,6 +26,57 @@ namespace TextArt.ViewModels
         public int Scatter { get; set; }
         public int XStep { get; set; }
         public int YStep { get; set; }
+
+        #endregion
+
+        #region "advanced properties"
+
+        private int m_desiredWidth;
+        private int m_desiredHeight;
+
+        public int DesiredWidth 
+        {
+            get
+            {
+                return m_desiredWidth;
+            }
+            set
+            {
+                m_desiredWidth = value;
+
+                if (InputImageIsLoaded() && LockAspectRatio)
+                {
+                    var ratio = ((double)m_desiredWidth / (double)InputImage.Width);
+
+                    m_desiredHeight = (int)(InputImage.Height * ratio);
+                }
+                
+            }
+        }
+
+        public int DesiredHeight 
+        {
+            get
+            {
+                return m_desiredHeight;
+            }
+            set
+            {
+                m_desiredHeight = value;
+
+                if (InputImageIsLoaded() && LockAspectRatio)
+                {
+                    var ratio = ((double)m_desiredHeight / (double)InputImage.Height);
+                    
+                    m_desiredWidth = (int)(InputImage.Width * ratio);
+                }
+            }
+        }
+
+        private bool InputImageIsLoaded()
+        {
+            return InputImage != null;
+        }
 
         #endregion
 
