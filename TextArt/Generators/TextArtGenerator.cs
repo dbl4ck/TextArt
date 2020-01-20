@@ -47,14 +47,30 @@ namespace TextArt.Generators
                     var height = character_dimension.Height;
 
                     PointF point = GetOffsetCoordinates(x, y, width, height);
-                    
+
                     point = ApplyScatter(random, point);
 
                     graphics.DrawString(character, font, brush, point);
                 }
             }
 
-           return generated;
+            Size size = GetNewSize();
+            Bitmap resized = Resize(generated, size);
+
+            return resized;
+        }
+
+        private Size GetNewSize()
+        {
+            return new Size(
+                    m_options.DesiredWidth,
+                    m_options.DesiredHeight
+                );
+        }
+
+        private static Bitmap Resize(Bitmap generated, Size size)
+        {
+            return new Bitmap(generated, size);
         }
 
         private PointF ApplyScatter(Random random, PointF point)
