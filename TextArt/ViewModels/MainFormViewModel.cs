@@ -11,6 +11,12 @@ namespace TextArt.ViewModels
 {
     public class MainFormViewModel
     {
+        #region "fields"
+
+        private int m_desiredWidth;
+        private int m_desiredHeight;
+
+        #endregion 
 
         #region "simple properties"
 
@@ -30,9 +36,6 @@ namespace TextArt.ViewModels
         #endregion
 
         #region "advanced properties"
-
-        private int m_desiredWidth;
-        private int m_desiredHeight;
 
         public int DesiredWidth 
         {
