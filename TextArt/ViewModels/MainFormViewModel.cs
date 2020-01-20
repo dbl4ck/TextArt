@@ -90,7 +90,7 @@ namespace TextArt.ViewModels
 
         private int GetProportionalOtherDimension(int newThis, int originalThis, int originalOther)
         {
-            return (int)(originalOther * ((double)newThis / (double)originalThis));
+            return (int)((double)originalOther * ((double)newThis / (double)originalThis));
         }
 
         internal void Generate()
